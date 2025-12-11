@@ -1,0 +1,294 @@
+:root{
+  --bg:#071129;        /* deep navy */
+  --card:#0f1b2a;      /* card background */
+  --muted:#9fb0c7;     /* muted text (not white) */
+  --accent:#4fd1c5;    /* teal accent */
+  --accent-2:#7aa2ff;  /* blue accent */
+  --text:#e6eef6;      /* very light (not pure white) */
+  --danger:#ff7b7b;
+  --glass: rgba(255,255,255,0.03);
+  --radius:12px;
+  --shadow: 0 6px 18px rgba(0,0,0,0.6);
+}
+
+/* Basic page */
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{
+  margin:0;
+  background: linear-gradient(180deg,var(--bg), #07101b 80%);
+  color:var(--text);
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.4;
+}
+
+/* Utilities */
+.center{display:flex;align-items:center;justify-content:center}
+.hidden{display:none}
+
+/* Card */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-radius:var(--radius);
+  padding:18px;
+  box-shadow:var(--shadow);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Login */
+.screen{min-height:100vh;padding:40px}
+.form-row{margin-bottom:12px}
+.title{margin:0 0 12px;font-size:20px;color:var(--accent-2)}
+.label{display:block;margin-bottom:8px;color:var(--muted);font-size:13px}
+.input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:transparent;
+  color:var(--text);
+  font-size:15px;
+}
+.input::placeholder{color:rgba(255,255,255,0.18);}
+.btn{
+  display:inline-block;padding:10px 14px;border-radius:8px;border:none;font-weight:600;
+  margin-top:12px;
+}
+.btn.primary{
+  background: linear-gradient(90deg,var(--accent), var(--accent-2));
+  color: #061018;
+  box-shadow: 0 6px 18px rgba(46, 112, 128, 0.15);
+}
+.btn.ghost{
+  background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.03);
+}
+
+/* Topbar */
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;padding:16px 24px;
+  border-bottom:1px solid rgba(255,255,255,0.02);
+  backdrop-filter: blur(4px);
+}
+.brand{font-weight:700;letter-spacing:0.3px;color:var(--accent-2)}
+.user-area{display:flex;gap:10px;align-items:center}
+.user-email{background:var(--glass);padding:6px 10px;border-radius:8px;color:var(--muted);font-size:14px}
+
+/* Main layout */
+.main{
+  display:flex;gap:18px;padding:22px;
+  max-width:1100px;margin:18px auto;
+}
+.left-panel{flex:0 0 360px;display:flex;flex-direction:column;gap:18px}
+.right-panel{flex:1;display:flex;flex-direction:column}
+
+/* Panels */
+.panel h2.subtitle{margin:0 0 12px;color:var(--muted);font-size:15px}
+.stock-list{display:flex;flex-wrap:wrap;gap:10px}
+.stock-btn{
+  display:inline-flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;
+  background:transparent;border:1px solid rgba(255,255,255,0.03);cursor:pointer;
+  min-width:80px;justify-content:center;color:var(--muted);font-weight:600;
+}
+.stock-btn.subbed{
+  background: linear-gradient(90deg, rgba(79,209,197,0.12), rgba(122,162,255,0.08));
+  border: 1px solid rgba(79,209,197,0.18);
+  color:var(--accent);
+  transform:translateY(-2px);
+}
+
+/* subscriptions list */
+.subs-list{min-height:60px;display:flex;flex-wrap:wrap;gap:10px}
+.sub-item{
+  padding:8px 10px;
+  border-radius:8px;
+  background:rgba(255,255,255,0.02);
+  font-weight:700;
+  color:var(--accent-2);
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.sub-item .remove-sub{
+  background: var(--danger);
+  border: none;
+  padding:2px 6px;
+  border-radius:6px;
+  cursor:pointer;
+  color:white;
+  font-weight:bold;
+}
+
+/* prices grid */
+.prices-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;
+}
+.price-card{
+  padding:14px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.02);
+}
+.price-symbol{font-weight:800;color:var(--accent-2);margin-bottom:6px}
+.price-value{font-size:20px;font-weight:900;color:var(--accent);}
+.price-graph{margin-top:10px;}
+
+/* footer */
+.footer{max-width:1100px;margin:0 auto;padding:12px 22px 40px;color:var(--muted)}
+
+/* Responsive */
+@media (max-width:880px){
+  .main{flex-direction:column;padding:14px}
+  .left-panel{flex:unset}
+}
+.tiny{font-size:12px}
+.muted{color:var(--muted);font-size:13px}
+
+/* price change animations & delta */
+.price-card { position: relative; transition: transform 160ms ease, box-shadow 160ms ease; }
+.price-card.price-up { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(34,197,94,0.06); border-color: rgba(79,209,197,0.12); }
+.price-card.price-down { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(239,68,68,0.06); border-color: rgba(255,123,123,0.08); }
+
+.delta { font-size:12px; margin-left:8px; font-weight:700; }
+.delta.up, .delta.positive { color: #22c55e; } /* green */
+.delta.down, .delta.negative { color: #ff6b6b; } /* red */
+.price-graph {
+  width: 100% !important;
+  height: 80px !important;
+  margin-top: 6px;
+  color:#ff6b6b;
+}/* --- Prices Grid --- */
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+/* --- Individual Stock Card --- */
+.price-card {
+  background: #1e293b; /* dark card */
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.price-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+/* --- Stock Symbol --- */
+.price-symbol {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #f1f5f9;
+}
+
+/* --- Price + Delta --- */
+.price-value {
+  font-size: 1rem;
+  color: #f8fafc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.delta {
+  font-weight: 600;
+}
+
+.delta.up { color: #22c55e; }   /* green */
+.delta.down { color: #ef4444; } /* red */
+.delta.same { color: #94a3b8; }  /* gray */
+
+/* --- Portfolio Info --- */
+.price-card .muted {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+/* --- Buttons --- */
+.price-card button {
+  margin-top: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+
+.price-card button.btn.primary {
+  background-color: #4fd1c5;
+  color: #1e293b;
+}
+
+.price-card button.btn.primary:hover {
+  background-color: #38b2ac;
+}
+
+.price-card button.btn.ghost {
+  background-color: transparent;
+  border: 1px solid #4fd1c5;
+  color: #4fd1c5;
+}
+
+.price-card button.btn.ghost:hover {
+  background-color: rgba(79,209,197,0.1);
+}
+
+/* --- Top Gainers / Losers --- */
+.price-card .muted.tiny {
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.price-card .top-gainer {
+  color: #22c55e; /* green */
+}
+
+.price-card .top-loser {
+  color: #ef4444; /* red */
+}
+
+/* Price change text colors */
+.delta.up {
+  color: #28ff71;       /* bright neon green */
+  font-weight: 700;
+}
+
+.delta.down {
+  color: #ff3b3b;       /* bright neon red */
+  font-weight: 700;
+}
+
+/* Card highlight flash animations */
+.price-up {
+  animation: priceUpFlash 0.6s ease-out;
+}
+
+.price-down {
+  animation: priceDownFlash 0.6s ease-out;
+}
+
+@keyframes priceUpFlash {
+  0% { background-color: rgba(0, 255, 120, 0.35); }
+  100% { background-color: transparent; }
+}
+
+@keyframes priceDownFlash {
+  0% { background-color: rgba(255, 60, 60, 0.35); }
+  100% { background-color: transparent; }
+}
+
+/* Optional: give the price a strong glow when moving */
+.price-value .delta.up {
+  text-shadow: 0 0 8px rgba(40,255,113,0.8);
+}
+
+.price-value .delta.down {
+  text-shadow: 0 0 8px rgba(255,60,60,0.8);
+}
