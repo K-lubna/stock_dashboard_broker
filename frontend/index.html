@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Stock Broker Client Dashboard</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div id="app" class="app-root">
+    <!-- Login screen -->
+    <div id="login-screen" class="screen center">
+      <div class="card">
+        <h1 class="title">Stock Broker Login</h1>
+        <form id="login-form">
+          <label class="label">Email</label>
+          <input id="email-input" class="input" type="email" placeholder="you@example.com" required />
+          <button class="btn primary" type="submit">Continue</button>
+        </form>
+        <p class="muted">Use different emails in two tabs/windows to simulate two users.</p>
+      </div>
+    </div>
+
+    <!-- Dashboard screen -->
+    <div id="dashboard-screen" class="screen hidden">
+      <header class="topbar">
+        <div class="brand">Stock Dashboard — Broker</div>
+        <div class="user-area">
+          <span id="user-email" class="user-email"></span>
+          <button id="logout-btn" class="btn ghost">Logout</button>
+        </div>
+      </header>
+
+      <main class="main">
+        <section class="left-panel">
+          <div class="panel card">
+            <h2 class="subtitle">Supported Stocks</h2>
+            <div id="stock-list" class="stock-list"></div>
+          </div>
+
+          <div class="panel card">
+            <h2 class="subtitle">Your Subscriptions</h2>
+            <div id="subs-list" class="subs-list">No subscriptions yet.</div>
+          </div>
+        </section>
+
+        <section class="right-panel">
+          <div class="panel card">
+            <h2 class="subtitle">Live Prices</h2>
+            <div id="prices-grid" class="prices-grid"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <div class="muted tiny">
+          Prices are simulated (random). Syncs across tabs using BroadcastChannel/localStorage.
+        </div>
+      </footer>
+    </div>
+  </div>
+
+
+  <script src="./app.js"></script>
+</body>
+</html>
